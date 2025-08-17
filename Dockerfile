@@ -2,8 +2,7 @@
 
 FROM eclipse-temurin:21-jdk
 
-LABEL version="4.5"
-
+LABEL version="1.0.2"
 
 RUN apt-get update && apt-get install -y curl unzip jq && \
     adduser --uid 99 --gid 100 --home /data --disabled-password minecraft

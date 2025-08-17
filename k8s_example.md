@@ -1,5 +1,8 @@
 # Kubernetes Example
 
+  > [!CAUTION]
+  > ATM10-TTS has not been pushed to any docker repository. The URLs here are still for ATM10.
+
 ## Disclaimer
 
 Your mileage may vary depending on what storage you're using for your k8s cluster. This is not an officially supported method of orchastrating this container as it is designed for Docker in Unraid. 
@@ -13,9 +16,9 @@ Remeber to either set nodeports manually or go get the assigment from your servi
 apiVersion: v1
 kind: Service
 metadata:
-  name: minecraft-all-the-mods-10
+  name: minecraft-all-the-mods-10-tts
   labels:
-    app: minecraft-all-the-mods-10
+    app: minecraft-all-the-mods-10-tts
 spec:
   type: NodePort
   ports:
@@ -32,21 +35,21 @@ spec:
     name: "minecraft-game"
     targetPort: "minecraft-game"
   selector:
-    app: minecraft-all-the-mods-10
+    app: minecraft-all-the-mods-10-tts
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: minecraft-all-the-mods-10
+  name: minecraft-all-the-mods-10-tts
   namespace: default
 spec:
   selector:
     matchLabels:
-      app: minecraft-all-the-mods-10
+      app: minecraft-all-the-mods-10-tts
   template:
     metadata:
       labels:
-        app: minecraft-all-the-mods-10
+        app: minecraft-all-the-mods-10-tts
     spec:
       initContainers:
         - name: volume-ownership
@@ -56,7 +59,7 @@ spec:
             - name: minecraft-data
               mountPath: /data
       containers:
-        - name: minecraft-all-the-mods-10
+        - name: minecraft-all-the-mods-10-tts
           image: w3lfare/allthemods10:latest  # Or specific version if needed
           env:
             - name: EULA
